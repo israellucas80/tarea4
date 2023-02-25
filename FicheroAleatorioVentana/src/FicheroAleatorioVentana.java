@@ -10,16 +10,15 @@ import javax.swing.JFrame;
  * @author Israel Lucas Torrijos
  * @version 0.1
  * @since 0.1
- * @see https://github.com/israellucas80
- *
+ * @see <a href="https://github.com/israellucas80">Repositorio de Github</a>
  */
 public class FicheroAleatorioVentana {
 
 	/**
 	 * Método de clase que sirve como punto de inicio de ejecución de la aplicación
 	 * 
-	 * @param String args
-	 * @throws IOException
+	 * @param args de tipo String
+	 * @throws IOException Error propagado de tipo IO
 	 */
 	public static void main(String[] args) throws IOException {
 

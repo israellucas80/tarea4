@@ -8,13 +8,21 @@ import java.io.RandomAccessFile;
 import javax.swing.*;
 
 /**
- * @author isra
+ * Implementa la ventana del Departamento.
+ * 
+ * @author Israel Lucas Torrijos
+ * @version 0.1
+ * @see <a href="https://github.com/israellucas80">Repositorio de Github</a>
+ * @since 0.1
  *
  */
-public class VentanaDepart extends JFrame implements ActionListener {
 
+public class VentanaDepart extends JFrame implements ActionListener {
+	// Constantes
 	private static final String NOEXISTEDEPART = "DEPARTAMENTO NO EXISTE.";
 	private static final long serialVersionUID = 1L;
+
+	// Atributos que hereda de JFrame
 	JTextField num = new JTextField(10);
 	JTextField nombre = new JTextField(25);
 	JTextField loc = new JTextField(25);
@@ -26,19 +34,31 @@ public class VentanaDepart extends JFrame implements ActionListener {
 	JLabel lnom = new JLabel("NOMBRE:");
 	JLabel lloc = new JLabel("LOCALIDAD:");
 
-	JButton balta = new JButton("Insertar Depar.t");
+	JButton balta = new JButton("Insertar Depart.");
 	JButton consu = new JButton("Consultar Depart.");
 	JButton borra = new JButton("Borrar Depart.");
 	JButton breset = new JButton("Limpiar datos.");
 	JButton modif = new JButton("Modificar Departamento.");
-	JButton ver = new JButton("Ver por consola.");
+	JButton ver = new JButton("Ver por consola."); //Ver por consola
 	JButton fin = new JButton("CERRAR");
-	Color c; // para poner colores
+	Color c;
+
 	// WHITE,LIGHTGRAY,GRAY,DARKGRAY,BLUE,BLACK,RED,MAGENTA,PINK,ORANGE,CYAN,GREEN,YELLOW
+
+	// Atributos de clase
+	/**
+	 * 
+	 */
 	private String existedepart;
 	private String depar_error;
 	private RandomAccessFile file;
 
+	
+	/**
+	 * Constructor con parámetros de la clase
+	 * 
+	 * @param f  variable de tipo JFrame
+	 */
 	public VentanaDepart(JFrame f) {
 		setTitle("GESTIÓN DE DEPARTAMENTOS.");
 
@@ -106,6 +126,12 @@ public class VentanaDepart extends JFrame implements ActionListener {
 		ver.addActionListener(this);
 	}
 
+	/**
+	 * Procedimiento que captura las acciones del usuario asociadas a eventos y
+	 * desencadena otras acciones
+	 * 
+	 * @param e Evento de acción
+	 */
 	public void actionPerformed(ActionEvent e) {
 
 		insertar_dpto(e);
@@ -137,6 +163,12 @@ public class VentanaDepart extends JFrame implements ActionListener {
 		}
 	}
 
+	/**
+	 * Método que modifica los valores del departamento en base a la elección del
+	 * usuario en la interfaz
+	 * 
+	 * @param argumento que representa un acción del usuario en la interfaz
+	 */
 	private void modificar_dpto(ActionEvent e) {
 		int dep;
 		int confirm;
@@ -172,10 +204,22 @@ public class VentanaDepart extends JFrame implements ActionListener {
 		}
 	}
 
+	/**
+	 * Método que determinar si se quiere modificar el departamento
+	 * 
+	 * @param argumento que representa un acción del usuario en la interfaz
+	 * @return Verdadero o falso si la acción se corresponde con modificar
+	 */
 	private boolean modifdepart(ActionEvent e) {
 		return e.getSource() == modif;
 	}
 
+	/**
+	 * Método que borra el departamento en base a la elección del usuario en la
+	 * interfaz
+	 * 
+	 * @param argumento que representa un acción del usuario en la interfaz
+	 */
 	private void borrar_dpto(ActionEvent e) {
 		int dep;
 		int confirm;
@@ -214,10 +258,22 @@ public class VentanaDepart extends JFrame implements ActionListener {
 		}
 	}
 
+	/**
+	 * Método que determinar si se quiere borrar el departamento
+	 * 
+	 * @param argumento que representa un acción del usuario en la interfaz
+	 * @return Verdadero o falso si la acción se corresponde con borrar
+	 */
 	private boolean borradepart(ActionEvent e) {
 		return e.getSource() == borra;
 	}
 
+	/**
+	 * Método que iniciar la consulta el departamento en base a la elección del
+	 * usuario en la interfaz
+	 * 
+	 * @param argumento que representa un acción del usuario en la interfaz
+	 */
 	private void consultar_dpto(ActionEvent e) {
 		int dep;
 		depar_error = "DEPARTAMENTO ERRÓNEO";
@@ -247,10 +303,22 @@ public class VentanaDepart extends JFrame implements ActionListener {
 		}
 	}
 
+	/**
+	 * Método que determinar si se quiere consultar el departamento
+	 * 
+	 * @param argumento que representa un acción del usuario en la interfaz
+	 * @return Verdadero o falso si la acción se corresponde con consultar
+	 */
 	private boolean consuldepart(ActionEvent e) {
 		return e.getSource() == consu;
 	}
 
+	/**
+	 * Método que inserta un departamento en base a la elección del usuario en la
+	 * interfaz
+	 * 
+	 * @param argumento que representa un acción del usuario en la interfaz
+	 */
 	private void insertar_dpto(ActionEvent e) {
 		int dep;
 		existedepart = "DEPARTAMENTO EXISTE.";
@@ -280,17 +348,28 @@ public class VentanaDepart extends JFrame implements ActionListener {
 		}
 	}
 
+	/**
+	 * Método que determinar si se quiere dar de alta el departamento
+	 * 
+	 * @param argumento que representa un acción del usuario en la interfaz
+	 * @return Verdadero o falso si la acción se corresponde con dar de alta
+	 */
 	private boolean altadepart(ActionEvent e) {
 		return e.getSource() == balta;
 	}
 
+	/**
+	 * Método para ver el resultado por consola
+	 * 
+	 * @throws IOException Error propagado de tipo IO
+	 */
 	public void verporconsola() throws IOException {
 		String nom = "", loc = "";
 		int dep = 0;
 		long pos;
 		File fichero = new File("AleatorioDep.dat");
 		file = new RandomAccessFile(fichero, "r");
-		
+
 		char cad[] = new char[10], aux;
 		if (file.length() > 0) {
 			pos = 0; // para situarnos al principio
@@ -316,14 +395,21 @@ public class VentanaDepart extends JFrame implements ActionListener {
 					break;
 
 			}
-			file.close(); 
+			file.close();
 			System.out.println(" ------------------------------------------");
-		} else 
+		} else
 			System.out.println(" ---------FICHERO VACIIIOOOO --------------------");
-		
-		file =null;
+
+		file = null;
 	}
 
+	/**
+	 * Método que consulta los registros
+	 * 
+	 * @param dep Departamento qué consultar
+	 * @return Verdadero o Falso
+	 * @throws IOException Propaga el error si se produce
+	 */
 	@SuppressWarnings("resource")
 	boolean consultar(int dep) throws IOException {
 		long pos;
@@ -349,6 +435,11 @@ public class VentanaDepart extends JFrame implements ActionListener {
 		}
 	} // fin consultar
 
+	/**
+	 * Método para visualizar el departamento indicado en su argumento
+	 * 
+	 * @param dep Departamento a visualizar
+	 */
 	void visualiza(int dep) {
 		String nom = "", loca = "";
 		long pos;
@@ -382,6 +473,11 @@ public class VentanaDepart extends JFrame implements ActionListener {
 		}
 	} // fin visualiza
 
+	/**
+	 * Borra un departamento que se le pasa como argumento
+	 * 
+	 * @param dep Departamento a eliminar
+	 */
 	void borrar(int dep) { // con borrar ponemos a 0 el dep que se quiere borrar
 							// y a blancos el nombre y la localidad
 		String nom = "", loca = "";
@@ -411,6 +507,11 @@ public class VentanaDepart extends JFrame implements ActionListener {
 		}
 	} // fin borrar
 
+	/**
+	 * Método para modificar un departamento
+	 * 
+	 * @param dep Departamento a modificar
+	 */
 	void modificar(int dep) { // con modificar asignamos los datos tecleados
 		String nom = "", loca = "";
 		StringBuffer buffer = null;
@@ -439,6 +540,14 @@ public class VentanaDepart extends JFrame implements ActionListener {
 		}
 	} // fin modificar
 
+	/**
+	 * 
+	 * Método para grabar datos en base a sus argumentos
+	 * 
+	 * @param dep Departamento
+	 * @param nom Nombre
+	 * @param loc Localidad
+	 */
 	void grabar(int dep, String nom, String loc) {
 		long pos;
 		StringBuffer buffer = null;
