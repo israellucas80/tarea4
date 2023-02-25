@@ -1,15 +1,16 @@
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
 
 import javax.swing.*;
 
+/**
+ * @author isra
+ *
+ */
 public class VentanaDepart extends JFrame implements ActionListener {
 
 	private static final String NOEXISTEDEPART = "DEPARTAMENTO NO EXISTE.";
@@ -36,6 +37,7 @@ public class VentanaDepart extends JFrame implements ActionListener {
 	// WHITE,LIGHTGRAY,GRAY,DARKGRAY,BLUE,BLACK,RED,MAGENTA,PINK,ORANGE,CYAN,GREEN,YELLOW
 	private String existedepart;
 	private String depar_error;
+	private RandomAccessFile file;
 
 	public VentanaDepart(JFrame f) {
 		setTitle("GESTIÓN DE DEPARTAMENTOS.");
@@ -287,7 +289,8 @@ public class VentanaDepart extends JFrame implements ActionListener {
 		int dep = 0;
 		long pos;
 		File fichero = new File("AleatorioDep.dat");
-		RandomAccessFile file = new RandomAccessFile(fichero, "r");
+		file = new RandomAccessFile(fichero, "r");
+		
 		char cad[] = new char[10], aux;
 		if (file.length() > 0) {
 			pos = 0; // para situarnos al principio
@@ -312,13 +315,16 @@ public class VentanaDepart extends JFrame implements ActionListener {
 				if (file.getFilePointer() == file.length())
 					break;
 
-			} // fin bucle for
-			file.close(); // cerrar fichero
+			}
+			file.close(); 
 			System.out.println(" ------------------------------------------");
-		} else // esto sólo sale la primera vez
+		} else 
 			System.out.println(" ---------FICHERO VACIIIOOOO --------------------");
-	}// fin verporconsola
+		
+		file =null;
+	}
 
+	@SuppressWarnings("resource")
 	boolean consultar(int dep) throws IOException {
 		long pos;
 		int depa;
